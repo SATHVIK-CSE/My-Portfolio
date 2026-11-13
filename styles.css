@@ -28,6 +28,4 @@
 @media(prefers-reduced-motion:reduce){.reveal{filter:none!important}.section-heading.reveal:after{transition:none;transform:scaleX(1)}}
 
 
-/* Section zoom is the sole entrance effect for scroll panels. */
-.about .reveal,.journey .reveal,.skills .reveal,.contact .reveal{opacity:1;transform:none;filter:none;transition:none}
-.about .section-heading.reveal:after,.journey .section-heading.reveal:after,.skills .section-heading.reveal:after{transform:scaleX(1);transition:none}
+/* Section zoom is the sole entrance effect for scroll panels. */.about .reveal,.projects .reveal,.journey .reveal,.skills .reveal,.contact .reveal{opacity:1;transform:none;filter:none;transition:none}.about .section-heading.reveal:after,.projects .section-heading.reveal:after,.journey .section-heading.reveal:after,.skills .section-heading.reveal:after{transform:scaleX(1);transition:none}
