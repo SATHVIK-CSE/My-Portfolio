@@ -17,3 +17,40 @@ const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');const 
   });
   frame.addEventListener('mouseleave', () => { frame.style.transform = ''; });
 })();
+// Portrait stamp intro + 3D tilt
+(() => {
+  const frame = document.querySelector('.portrait-frame');
+  const img = frame && frame.querySelector('img');
+  if (!frame || !img) return;
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    frame.dataset.state = 'reveal';
+    return;
+  }
+
+  // Wait for the photo to load (minimum 1.8s so the stamp is seen)
+  frame.dataset.state = 'wait';
+  const imgReady = new Promise((resolve) => {
+    if (img.complete) return resolve();
+    img.addEventListener('load', resolve, { once: true });
+    img.addEventListener('error', resolve, { once: true });
+  });
+  const minWait = new Promise((resolve) => setTimeout(resolve, 1800));
+
+  Promise.all([imgReady, minWait]).then(() => {
+    frame.dataset.state = 'hit';
+    setTimeout(() => { frame.dataset.state = 'reveal'; }, 900);
+  });
+
+  // 3D tilt on desktop, only after the reveal
+  if (matchMedia('(hover: none)').matches) return;
+  frame.addEventListener('mousemove', (e) => {
+    if (frame.dataset.state !== 'reveal') return;
+    const r = frame.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    frame.style.transform =
+      `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+  });
+  frame.addEventListener('mouseleave', () => { frame.style.transform = ''; });
+})();
