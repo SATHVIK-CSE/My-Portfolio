@@ -4,3 +4,16 @@ const sectionLinks=[...document.querySelectorAll('.navigation a[href^="#"]')];co
 
 
 const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');const zoomSections=[...document.querySelectorAll('main section[id]')];let focusedSection=null;let zoomFrame=false;const findFocusedSection=()=>{const focusY=window.innerHeight*.48;let nearest=null;let distance=Infinity;for(const section of zoomSections){const rect=section.getBoundingClientRect();const center=rect.top+Math.min(rect.height,window.innerHeight)*.5;const gap=Math.abs(center-focusY);if(gap<distance){nearest=section;distance=gap}}if(!focusedSection){focusedSection=nearest;return}if(!nearest||nearest===focusedSection)return;const previous=focusedSection;focusedSection=nearest;if(reducedMotion.matches||typeof nearest.animate!=='function')return;const visible=(section)=>{const r=section.getBoundingClientRect();return r.bottom>0&&r.top<window.innerHeight};if(visible(previous))previous.animate([{transform:'scale(1)',filter:'blur(0px)'},{transform:'scale(1.055)',filter:'blur(2px)'}],{duration:460,easing:'cubic-bezier(.65,0,.85,.36)'});if(visible(nearest))nearest.animate([{transform:'scale(.9)',filter:'blur(3px)'},{transform:'scale(1.012)',filter:'blur(0px)'},{transform:'scale(1)',filter:'blur(0px)'}],{duration:580,easing:'cubic-bezier(.16,1,.3,1)'})};window.addEventListener('scroll',()=>{if(!zoomFrame){window.requestAnimationFrame(()=>{findFocusedSection();zoomFrame=false});zoomFrame=true}},{passive:true});window.addEventListener('resize',findFocusedSection);findFocusedSection();
+// Portrait 3D tilt (desktop only)
+(() => {
+  const frame = document.querySelector('.portrait-frame');
+  if (!frame || matchMedia('(hover: none)').matches) return;
+  frame.addEventListener('mousemove', (e) => {
+    const r = frame.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    frame.style.transform =
+      `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 12}deg) scale(1.02)`;
+  });
+  frame.addEventListener('mouseleave', () => { frame.style.transform = ''; });
+})();
