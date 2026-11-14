@@ -29,3 +29,36 @@
 
 
 /* Section zoom is the sole entrance effect for scroll panels. */.about .reveal,.projects .reveal,.journey .reveal,.skills .reveal,.contact .reveal{opacity:1;transform:none;filter:none;transition:none}.about .section-heading.reveal:after,.projects .section-heading.reveal:after,.journey .section-heading.reveal:after,.skills .section-heading.reveal:after{transform:scaleX(1);transition:none}
+/* ---------- Portrait animation ---------- */
+.portrait-frame img {
+  animation:
+    portrait-reveal 1.4s cubic-bezier(.2,.7,.2,1) .2s both,
+    portrait-float 6s ease-in-out 1.6s infinite;
+  transition: filter .5s ease;
+  will-change: transform;
+}
+@keyframes portrait-reveal {
+  from { clip-path: inset(0 0 100% 0); transform: scale(1.12); opacity: 0; }
+  to   { clip-path: inset(0 0 0 0);    transform: scale(1);    opacity: 1; }
+}
+@keyframes portrait-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.portrait-frame {
+  transition: transform .15s ease-out;
+  animation: portrait-glow 4s ease-in-out infinite;
+}
+@keyframes portrait-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(94, 234, 212, .12); }
+  50%      { box-shadow: 0 0 45px rgba(94, 234, 212, .30); }
+}
+.portrait-frame:hover img { filter: brightness(1.06) saturate(1.1); }
+.portrait-corner { animation: corner-pulse 2.5s ease-in-out infinite; }
+@keyframes corner-pulse {
+  0%, 100% { opacity: .5; }
+  50%      { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .portrait-frame, .portrait-frame img, .portrait-corner { animation: none; }
+}
