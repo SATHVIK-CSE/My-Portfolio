@@ -28,7 +28,25 @@
       </div>
       <div class="portrait-wrap reveal" aria-label="Portrait of K. Sathvik">
         <div class="portrait-orbit orbit-a"></div><div class="portrait-orbit orbit-b"></div>
-        <div class="portrait-frame"><img src="sathvik-portrait.jpeg" alt="Portrait of K. Sathvik."><span class="portrait-corner corner-tl"></span><span class="portrait-corner corner-br"></span></div>
+       <div class="portrait-frame">
+  <img src="sathvik-portrait.jpeg" alt="Portrait of K. Sathvik.">
+  <div class="stamp" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <path id="pt-ring" d="M100,100 m-70,0 a70,70 0 1,1 140,0 a70,70 0 1,1 -140,0"/>
+        <filter id="pt-ink"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" result="n"/><feColorMatrix in="n" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -2.2 2.1" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter>
+      </defs>
+      <g filter="url(#pt-ink)" fill="currentColor" stroke="currentColor">
+        <circle cx="100" cy="100" r="94" fill="none" stroke-width="5"/>
+        <circle cx="100" cy="100" r="50" fill="none" stroke-width="2"/>
+        <text font-family="Manrope,sans-serif" font-weight="800" font-size="15" stroke="none"><textPath href="#pt-ring" textLength="425" lengthAdjust="spacing">K. SATHVIK ★ CS &amp; CYBERSECURITY ★ HYDERABAD ★</textPath></text>
+        <text x="100" y="112" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="34" stroke="none">KS.</text>
+      </g>
+    </svg>
+  </div>
+  <span class="loading-label">LOADING PORTRAIT</span>
+  <span class="portrait-corner corner-tl"></span><span class="portrait-corner corner-br"></span>
+</div>
         <div class="portrait-caption"><span class="caption-dot"></span> K. SATHVIK · HYDERABAD <span class="caption-line"></span></div>
         <div class="portrait-note">Computer science student.<br><span>Curious about data analysis &amp; cybersecurity</span></div>
       </div>
