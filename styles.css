@@ -99,3 +99,5 @@
     transition: none !important;
   }
 }
+
+.certificates .certificate-title-card{grid-template-columns:1fr}
